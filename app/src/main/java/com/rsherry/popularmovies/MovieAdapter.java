@@ -1,18 +1,22 @@
 package com.rsherry.popularmovies;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     public Movie[] mMovies;
-    private Context mContext;
+
+    public MovieAdapter(Movie[] movies) {
+        mMovies = movies;
+    }
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -24,7 +28,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        holder.bindMovie(mMovies[position]);
+        Movie movie = mMovies[position];
+
+        Uri uri = Uri.parse(movie.getMoviePoster());
+        Picasso.get().load(uri).into(holder.mMoviePoster);
     }
 
     @Override
@@ -42,10 +49,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             super(itemView);
 
             mMoviePoster = itemView.findViewById(R.id.moviePoster);
-        }
-
-        public void bindMovie(Movie movie) {
-
         }
     }
 }
