@@ -10,11 +10,13 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    public Movie[] mMovies;
+    public List<Movie> mMovies;
 
-    public MovieAdapter(Movie[] movies) {
+    public MovieAdapter(List<Movie> movies) {
         mMovies = movies;
     }
 
@@ -28,7 +30,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        Movie movie = mMovies[position];
+        Movie movie = mMovies.get(position);
 
         Uri uri = Uri.parse(movie.getMoviePoster());
         Picasso.get().load(uri).into(holder.mMoviePoster);
@@ -36,7 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public int getItemCount() {
-        return mMovies.length;
+        return mMovies.size();
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {

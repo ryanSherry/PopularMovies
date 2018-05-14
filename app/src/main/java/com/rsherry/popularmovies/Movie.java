@@ -7,6 +7,7 @@ public class Movie {
     private String mMoviePoster;
     private double mVoteAverage;
     private String mPlotSynopsis;
+    public String movieUrl = "http://image.tmdb.org/t/p/w185/";
 
     public Movie() {
 
@@ -15,7 +16,7 @@ public class Movie {
     public Movie (String title, String releaseDate, String moviePoster, double voteAverage, String plotSynopsis) {
         mTitle = title;
         mReleaseDate = releaseDate;
-        mMoviePoster = moviePoster;
+        mMoviePoster = movieUrl + moviePoster;
         mVoteAverage = voteAverage;
         mPlotSynopsis = plotSynopsis;
     }
@@ -37,11 +38,12 @@ public class Movie {
     }
 
     public String getMoviePoster() {
+
         return mMoviePoster;
     }
 
     public void setMoviePoster(String moviePoster) {
-        mMoviePoster = moviePoster;
+        mMoviePoster = movieUrl + moviePoster;
     }
 
     public double getVoteAverage() {
