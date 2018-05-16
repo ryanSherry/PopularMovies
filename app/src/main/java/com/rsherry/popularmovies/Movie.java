@@ -1,6 +1,9 @@
 package com.rsherry.popularmovies;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Movie implements Parcelable{
 
     private String mTitle;
     private String mReleaseDate;
@@ -61,4 +64,39 @@ public class Movie {
     public void setPlotSynopsis(String plotSynopsis) {
         mPlotSynopsis = plotSynopsis;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mMoviePoster);
+        dest.writeString(mReleaseDate);
+        dest.writeString(mMoviePoster);
+        dest.writeDouble(mVoteAverage);
+        dest.writeString(mPlotSynopsis);
+
+    }
+
+    private Movie (Parcel in) {
+        mMoviePoster = in.readString();
+        mReleaseDate = in.readString();
+        mMoviePoster = in.readString();
+        mVoteAverage = in.readDouble();
+        mPlotSynopsis = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

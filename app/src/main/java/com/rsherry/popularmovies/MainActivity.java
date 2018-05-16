@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MovieAdapter(mMovies);
+        adapter = new MovieAdapter(mMovies,this);
         mRecyclerView.setAdapter(adapter);
 
         new FetchMovies().execute(getUrlString("popular"));
