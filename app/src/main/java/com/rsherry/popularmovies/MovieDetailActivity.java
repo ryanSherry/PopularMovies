@@ -11,7 +11,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +41,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Movie movie = intent.getParcelableExtra("MOVIE");
 
-        Uri uri = Uri.parse(movie.getMoviePoster());
+        Uri uri = Uri.parse(movie.getMovieBackdrop());
         Picasso.get().load(uri).into(mMoviePoster);
 
         populateUI(movie);
@@ -46,8 +51,19 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void populateUI(Movie movie) {
 
         mTitle.setText(movie.getTitle());
-        mReleaseDate.setText(movie.getReleaseDate());
+        mReleaseDate.setText(dateFormatter(movie.getReleaseDate()));
         mPlotSynopsis.setText(movie.getPlotSynopsis());
-        mRating.setRating((float) movie.getVoteAverage());
+        mRating.setRating((float) movie.getVoteAverage()/2);
+    }
+
+    private String dateFormatter(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("MM yyyy");
+        Date newDate = new Date();
+        try {
+            newDate = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate.toString();
     }
 }

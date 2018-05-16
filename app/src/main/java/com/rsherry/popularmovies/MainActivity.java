@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     jsonMovie.getString("title"),
                     jsonMovie.getString("release_date"),
                     jsonMovie.getString("poster_path"),
+                    jsonMovie.getString("backdrop_path"),
                     jsonMovie.getDouble("vote_average"),
                     jsonMovie.getString("overview")
             ));
