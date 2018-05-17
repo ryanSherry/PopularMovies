@@ -61,9 +61,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         Date newDate = new Date();
         try {
             newDate = format.parse(date);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return newDate.toString();
+        String dateString = (String) android.text.format.DateFormat.format("MMMM yyyy",newDate);
+        return dateString;
     }
 }
