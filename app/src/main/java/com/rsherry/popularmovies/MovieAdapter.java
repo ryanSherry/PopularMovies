@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,28 +14,32 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    public List<Movie> mMovies;
+    private ArrayList<Movie> mMovies;
     private Context mContext;
 
-    public MovieAdapter(List<Movie> movies, Context context) {
+    MovieAdapter(ArrayList<Movie> movies, Context context) {
         mMovies = movies;
         mContext = context;
     }
 
+    @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_list_item,parent,false  );
-        MovieViewHolder viewHolder = new MovieViewHolder(view);
-        return viewHolder;
+        return new MovieViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, final int position) {
         final Movie movie = mMovies.get(position);
 
         Uri uri = Uri.parse(movie.getMoviePoster());
@@ -57,18 +62,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView mMoviePoster;
-        ConstraintLayout parentLayout;
+        @BindView(R.id.moviePoster) ImageView mMoviePoster;
+        @BindView(R.id.parentLayout) ConstraintLayout parentLayout;
 
-        public MovieViewHolder(View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
-
-            mMoviePoster = itemView.findViewById(R.id.moviePoster);
-            parentLayout = itemView.findViewById(R.id.parentLayout);
+            ButterKnife.bind(this,itemView);
         }
 
     }
-
-
 
 }

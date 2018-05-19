@@ -11,12 +11,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +32,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         ButterKnife.bind(this);
-
-
 
         Intent intent = getIntent();
         Movie movie = intent.getParcelableExtra("MOVIE");
@@ -57,7 +52,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private String dateFormatter(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = new Date();
         try {
             newDate = format.parse(date);
@@ -65,7 +60,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String dateString = (String) android.text.format.DateFormat.format("MMMM yyyy",newDate);
-        return dateString;
+        return (String) android.text.format.DateFormat.format("MMMM yyyy",newDate);
     }
 }
