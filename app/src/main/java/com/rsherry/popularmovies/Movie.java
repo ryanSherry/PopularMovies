@@ -1,13 +1,12 @@
 package com.rsherry.popularmovies;
 
 public class Movie {
+
     private String mTitle;
     private String mReleaseDate;
     private String mMoviePoster;
     private double mVoteAverage;
     private String mPlotSynopsis;
-
-
 
     public Movie() {
 
